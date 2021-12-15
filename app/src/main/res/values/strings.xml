@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">DVT Weather App</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_favs">Favourites</string>
     <string name="location_permission_rationale_title">Location permission required</string>
     <string name="location_permission_rationale_message">In order to receive your local weather update, you must grant this permission</string>
     <string name="location_permission_denied_message">Location permission is required in order to receive local weather updates</string>

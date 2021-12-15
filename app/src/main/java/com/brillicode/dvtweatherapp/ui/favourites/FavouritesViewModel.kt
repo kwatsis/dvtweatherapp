@@ -1,13 +1,13 @@
-package com.brillicode.dvtweatherapp.ui.dashboard
+package com.brillicode.dvtweatherapp.ui.favourites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class FavouritesViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "There are no saved weathers at the moment."
     }
     val text: LiveData<String> = _text
 }

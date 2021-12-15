@@ -1,16 +1,25 @@
 package com.brillicode.dvtweatherapp
 
 import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.brillicode.dvtweatherapp.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -18,9 +27,12 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LocationListener {
 
     private lateinit var binding: ActivityMainBinding
+    private  var deviceLatitude :Double = 0.0
+    private  var deviceLongitude :Double = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +58,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun validatePermission() {
         Dexter.withActivity(this)
-            .withPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             .withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    Toast.makeText(this@MainActivity, "Permission Granted", Toast.LENGTH_LONG).show()
+                    getLocation()
                 }
 
                 override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
@@ -72,5 +84,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             ).check()
+    }
+
+    private fun getLocation() {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 2)
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5f, this)
+    }
+
+    override fun onLocationChanged(location: Location) {
+        deviceLatitude = location.latitude
+        deviceLongitude = location.longitude
+        Log.d("MainActivity", "Longitude: $deviceLongitude \n Latitude: $deviceLatitude")
     }
 }

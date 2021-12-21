@@ -20,11 +20,11 @@
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spin_kit"
-        style="@style/SpinKitView.Circle"
+        style="@style/SpinKitView.WanderingCubes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="14dp"
         app:SpinKit_Color="@color/dvt_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

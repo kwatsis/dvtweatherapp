@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.brillicode.dvtweatherapp.databinding.FragmentDashboardBinding
+import com.brillicode.dvtweatherapp.databinding.FragmentFavouritesBinding
 
 class FavouritesFragment : Fragment() {
 
     private lateinit var favouritesViewModel: FavouritesViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentFavouritesBinding? = null
 
     private val binding get() = _binding!!
 
@@ -25,7 +25,7 @@ class FavouritesFragment : Fragment() {
         favouritesViewModel =
             ViewModelProvider(this)[FavouritesViewModel::class.java]
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard

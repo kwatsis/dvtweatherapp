@@ -16,5 +16,5 @@
         android:id="@+id/navigation_favorites"
         android:name="com.brillicode.dvtweatherapp.ui.favourites.FavouritesFragment"
         android:label="@string/title_favs"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_favourites" />
 </navigation>

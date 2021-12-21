@@ -47,13 +47,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
 
     open fun onGrantedPermission(){}
 
-    open fun onDeniedPermission() {
-        Toast.makeText(
-            this@BaseActivity,
-            R.string.location_permission_denied_message,
-            Toast.LENGTH_LONG
-        ).show()
-    }
+    open fun onDeniedPermission() {}
 
     protected inline fun <reified T : ViewDataBinding> binding(@LayoutRes resId: Int): Lazy<T> =
         lazy { DataBindingUtil.setContentView<T>(this, resId) }
@@ -62,9 +56,6 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
         Dexter.withActivity(this)
             .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             .withListener(object : PermissionListener {
-                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    getLocation()
-                }
                 override fun onPermissionRationaleShouldBeShown(
                     permission: PermissionRequest?,
                     token: PermissionToken?
@@ -79,11 +70,13 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
                         .setPositiveButton(android.R.string.ok) { dialogInterface, _ ->
                             dialogInterface.dismiss()
                             token?.continuePermissionRequest()
-                            onGrantedPermission()
                         }
                         .show()
                 }
 
+                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                    getLocation()
+                }
                 override fun onPermissionDenied(response: PermissionDeniedResponse?) {
                     onDeniedPermission()
                 }

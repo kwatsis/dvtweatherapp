@@ -1,29 +1,23 @@
 package com.brillicode.dvtweatherapp
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.brillicode.dvtweatherapp.base.BaseActivity
 import com.brillicode.dvtweatherapp.databinding.ActivityMainBinding
-import com.brillicode.dvtweatherapp.util.Constants
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-    private val latitude = deviceLat;
-    private val longitude = deviceLong;
+    private lateinit var binding: ActivityMainBinding;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        validatePermission()
 
         val navView: BottomNavigationView = binding.navView
 
@@ -40,6 +34,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onDeniedPermission() {
-        Log.d(Constants.TAG + " MainActivity", "Latitude: $latitude\nLongitude:$longitude")
+        Toast.makeText(
+            this,
+            R.string.location_permission_denied_message,
+            Toast.LENGTH_LONG
+        ).show()
     }
 }

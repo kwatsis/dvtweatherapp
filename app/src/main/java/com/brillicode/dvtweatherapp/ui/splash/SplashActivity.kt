@@ -8,12 +8,15 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.activity.viewModels
 import com.brillicode.dvtweatherapp.MainActivity
 import com.brillicode.dvtweatherapp.R
 import com.brillicode.dvtweatherapp.base.BaseActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
+    private val splashViewModel by viewModels<SplashViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -34,9 +37,15 @@ class SplashActivity : BaseActivity() {
         }, 3000)
     }
 
-    override fun onGrantedPermission() { launchHomeScreen() }
+    override fun onGrantedPermission() {
+        splashViewModel.isFromSplash.postValue(true)
+        splashViewModel.isGranted.postValue(true)
+        launchHomeScreen()
+    }
 
-    override fun onDeniedPermission() { launchHomeScreen() }
+    override fun onDeniedPermission() {
+       finish()
+    }
 
     private fun launchHomeScreen() {
         val intent = Intent(this, MainActivity::class.java)

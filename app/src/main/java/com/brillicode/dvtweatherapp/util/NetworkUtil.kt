@@ -21,7 +21,8 @@ object NetworkUtil {
                 else -> false
             }
         } else {
-            // Returns details about the currently active default data network.
+            // Returns details about the currently active default data network. - [TODO - KJS - Refactor [Deprecated: activeNetworkInfo() and isConnectedOrConnecting()
+
             val networkInfo = connectivityManager.activeNetworkInfo
             return networkInfo != null && networkInfo.isConnectedOrConnecting
         }

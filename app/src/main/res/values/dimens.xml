@@ -16,4 +16,8 @@
     <dimen name="sunrise_marginTop">10dp</dimen>
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_margin">16dp</dimen>
+    <dimen name="linear_layout_marginTop">30dp</dimen>
+
+    <dimen name="range_text_size">22sp</dimen>
+
 </resources>

@@ -24,7 +24,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +32,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.brillicode.dvtweatherapp.R
-import com.brillicode.dvtweatherapp.util.Constants
+import com.brillicode.dvtweatherapp.util.constants.AppConstants
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -48,6 +47,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
     open fun onGrantedPermission(){}
 
     open fun onDeniedPermission() {}
+
 
     protected inline fun <reified T : ViewDataBinding> binding(@LayoutRes resId: Int): Lazy<T> =
         lazy { DataBindingUtil.setContentView<T>(this, resId) }
@@ -83,6 +83,12 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
             }
             ).check()
     }
+    override fun onLocationChanged(location: Location) {
+        deviceLong = location.longitude
+        deviceLat = location.latitude
+        Log.d(AppConstants.TAG, "Longitude: $deviceLong \n Latitude: $deviceLat")
+        onGrantedPermission()
+    }
 
     private fun getLocation() {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -98,13 +104,6 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
             )
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5f, this)
-    }
-
-    override fun onLocationChanged(location: Location) {
-        deviceLong = location.longitude
-        deviceLat = location.latitude
-        Log.d(Constants.TAG, "Longitude: $deviceLong \n Latitude: $deviceLat")
-        onGrantedPermission()
     }
 
 }

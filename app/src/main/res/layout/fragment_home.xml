@@ -40,42 +40,29 @@
 
     <LinearLayout
         android:id="@+id/lnr_min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical"
+        style="@style/LinearRange"
+        android:layout_marginStart="@dimen/main_screen_content_padding"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feel">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            android:id="@+id/tv_min_temp"
+            style="@style/TextStyleRegular"
             android:text="12"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="@dimen/range_text_size" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
+            android:id="@+id/tv_min"
+            style="@style/TextStyleLight"
             android:gravity="center"
-            android:text="min"
-            android:textColor="@color/white" />
+            android:text="@string/min" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lnr_current"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/LinearRange"
         android:layout_marginStart="142dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintLeft_toRightOf="@+id/lnr_min"
         app:layout_constraintStart_toEndOf="@+id/lnr_min"
@@ -83,30 +70,20 @@
 
         <TextView
             android:id="@+id/tv_current"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            style="@style/TextStyleRegular"
             android:text="15"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="@dimen/range_text_size" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
+            style="@style/TextStyleLight"
             android:gravity="center"
-            android:text="Current"
-            android:textColor="@color/white" />
+            android:text="@string/current" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lnr_max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        style="@style/LinearRange"
         android:layout_marginEnd="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,22 +92,15 @@
 
         <TextView
             android:id="@+id/tv_max"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
+            style="@style/TextStyleRegular"
             android:text="17"
-            android:textColor="@color/white"
-            android:textSize="22sp" />
+            android:textSize="@dimen/range_text_size" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
+            style="@style/TextStyleLight"
             android:gravity="center"
-            android:text="max"
-            android:textColor="@color/white" />
+            android:text="@string/max" />
     </LinearLayout>
-
 
     <View
         android:id="@+id/view"
@@ -140,5 +110,11 @@
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feel" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_weather_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

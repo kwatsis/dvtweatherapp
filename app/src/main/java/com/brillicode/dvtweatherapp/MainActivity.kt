@@ -30,4 +30,9 @@ class MainActivity : BaseActivity() {
             Toast.LENGTH_LONG
         ).show()
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        validatePermission()
+    }
 }

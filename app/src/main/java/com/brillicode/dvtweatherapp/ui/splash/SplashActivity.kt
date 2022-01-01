@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import com.brillicode.dvtweatherapp.MainActivity
 import com.brillicode.dvtweatherapp.R
 import com.brillicode.dvtweatherapp.base.BaseActivity
+import com.brillicode.dvtweatherapp.util.constants.AppConstants
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
@@ -34,17 +35,17 @@ class SplashActivity : BaseActivity() {
         }
         Handler(Looper.getMainLooper()).postDelayed({
             validatePermission()
-        }, 3000)
+        }, AppConstants.TIMEOUT)
     }
 
     override fun onGrantedPermission() {
         splashViewModel.isFromSplash.postValue(true)
         splashViewModel.isGranted.postValue(true)
-        launchHomeScreen()
+        launchHomeScreen() //TODO - KJ - Verify this logic
     }
 
     override fun onDeniedPermission() {
-       finish()
+       finish() //TODO REPLACE THIS LOGIC WITH A SNACK BAR WHICH THE POSITIVE ACTION finish()ES THE ACTIVITY
     }
 
     private fun launchHomeScreen() {

@@ -6,22 +6,26 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.viewModels
 import com.brillicode.dvtweatherapp.MainActivity
 import com.brillicode.dvtweatherapp.R
 import com.brillicode.dvtweatherapp.base.BaseActivity
+import com.brillicode.dvtweatherapp.databinding.ActivitySplashBinding
 import com.brillicode.dvtweatherapp.util.constants.AppConstants
+import com.google.android.material.snackbar.Snackbar
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
     private val splashViewModel by viewModels<SplashViewModel>()
+    private lateinit var view: View;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
+        view = ActivitySplashBinding.inflate(layoutInflater).root
         supportActionBar?.hide()
 
         @Suppress("DEPRECATION")
@@ -45,7 +49,15 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun onDeniedPermission() {
-       finish() //TODO REPLACE THIS LOGIC WITH A SNACK BAR WHICH THE POSITIVE ACTION finish()ES THE ACTIVITY
+        val snack = Snackbar.make(
+            view,
+            getString(R.string.location_permission_denied_message),
+            Snackbar.LENGTH_LONG
+        )
+        snack.setAction(getString(R.string.ok)) {
+            finish()
+        }
+        snack.show()
     }
 
     private fun launchHomeScreen() {

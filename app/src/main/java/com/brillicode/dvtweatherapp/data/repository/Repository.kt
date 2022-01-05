@@ -19,7 +19,5 @@ package com.brillicode.dvtweatherapp.data.repository
 
 
 interface Repository {
-
-    suspend fun getWeather(type: String) : List<Character>
-
+    suspend fun getWeather(type: String): List<Character>
 }

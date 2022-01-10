@@ -17,10 +17,16 @@ package com.brillicode.dvtweatherapp.data.remote
  *
  **/
 
-import com.brillicode.dvtweatherapp.data.service.WeatherService
+import com.brillicode.dvtweatherapp.data.service.ApiService
+import com.brillicode.dvtweatherapp.util.constants.AppConstants
+import com.brillicode.dvtweatherapp.util.constants.NetworkConstants
 
-class RemoteDataSourceImpl(private val service: WeatherService) : RemoteDataSource {
+class RemoteDataSourceImpl(private val api: ApiService) : RemoteDataSource {
+    override suspend fun getWeather(latitude: Double, longitude: Double) = api.getWeather(
+        AppConstants.APP_ID, latitude, longitude, NetworkConstants.METRIC_UNIT
+    )
 
-    override suspend fun getCharacters(type: String) = service.getCharacters(type)
-
+    override suspend fun getForecast(latitude: Double, longitude: Double) = api.getForecast(
+        AppConstants.APP_ID, latitude, longitude, NetworkConstants.METRIC_UNIT
+    )
 }

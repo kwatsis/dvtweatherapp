@@ -17,7 +17,7 @@ package com.brillicode.dvtweatherapp.di
  *
  **/
 
-import com.brillicode.dvtweatherapp.data.service.WeatherService
+import com.brillicode.dvtweatherapp.data.service.ApiService
 import com.brillicode.dvtweatherapp.util.constants.NetworkConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -48,5 +48,5 @@ val networkModule = module {
             .build()
     }
 
-    single { get<Retrofit>().create(WeatherService::class.java) }
+    single { get<Retrofit>().create(ApiService::class.java) }
 }

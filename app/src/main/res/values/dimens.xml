@@ -8,6 +8,7 @@
     <dimen name="card_view_corner_radius">8dp</dimen>
     <dimen name="card_view_elevation">5dp</dimen>
     <dimen name="card_view_content_padding">10dp</dimen>
+    <dimen name="content_small_margin">4dp</dimen>
     <dimen name="identification_image_size">50dp</dimen>
     <dimen name="identification_image_marginEnd">10dp</dimen>
     <dimen name="label_text_size">18sp</dimen>
@@ -17,6 +18,7 @@
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_margin">16dp</dimen>
     <dimen name="linear_layout_marginTop">30dp</dimen>
+    <dimen name="linear_layout_default_weight">1</dimen>
 
     <dimen name="range_text_size">22sp</dimen>
 

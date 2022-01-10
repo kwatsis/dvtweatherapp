@@ -22,5 +22,5 @@ import com.brillicode.dvtweatherapp.data.remote.RemoteDataSourceImpl
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-    single<RemoteDataSource> { RemoteDataSourceImpl(service = get()) }
+    single<RemoteDataSource> { RemoteDataSourceImpl(api = get()) }
 }

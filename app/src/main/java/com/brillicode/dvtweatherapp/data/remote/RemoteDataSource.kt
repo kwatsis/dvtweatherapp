@@ -1,5 +1,8 @@
 package com.brillicode.dvtweatherapp.data.remote
 
+import com.brillicode.dvtweatherapp.data.model.ForecastResponse
+import com.brillicode.dvtweatherapp.data.model.WeatherResponse
+
 /**
  * Copyright 2021 Kwatsinyana Sesotlo
  *
@@ -20,6 +23,7 @@ package com.brillicode.dvtweatherapp.data.remote
 
 interface RemoteDataSource {
 
-    suspend fun getCharacters(type: String) : List<Character>
+    suspend fun getWeather(latitude: Double, longitude: Double): WeatherResponse
 
+    suspend fun getForecast(latitude: Double, longitude: Double): ForecastResponse
 }

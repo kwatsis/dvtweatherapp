@@ -2,24 +2,29 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="main_screen_content_padding">16dp</dimen>
     <dimen name="card_view_marginStartEnd">5dp</dimen>
     <dimen name="card_view_marginTop">16dp</dimen>
     <dimen name="card_view_corner_radius">8dp</dimen>
     <dimen name="card_view_elevation">5dp</dimen>
     <dimen name="card_view_content_padding">10dp</dimen>
-    <dimen name="content_small_margin">4dp</dimen>
     <dimen name="identification_image_size">50dp</dimen>
     <dimen name="identification_image_marginEnd">10dp</dimen>
     <dimen name="label_text_size">18sp</dimen>
     <dimen name="value_text_size">16sp</dimen>
     <dimen name="sunset_marginStart">10dp</dimen>
     <dimen name="sunrise_marginTop">10dp</dimen>
-    <dimen name="divider_height">1dp</dimen>
-    <dimen name="divider_margin">16dp</dimen>
-    <dimen name="linear_layout_marginTop">30dp</dimen>
-    <dimen name="linear_layout_default_weight">1</dimen>
 
-    <dimen name="range_text_size">22sp</dimen>
+    <!-- Content margins -->
+    <dimen name="content_tiny_margin">4dp</dimen>
+    <dimen name="content_small_margin">8dp</dimen>
+    <dimen name="content_medium_margin">12dp</dimen>
+    <dimen name="content_main_margin">16dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="text_size_tiny">8sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_standard">16sp</dimen>
+    <dimen name="text_size_large">32sp</dimen>
+    <dimen name="text_size_colossal">72sp</dimen>
 
 </resources>

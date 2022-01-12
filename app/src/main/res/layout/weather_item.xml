@@ -42,7 +42,7 @@
             android:id="@+id/img"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginEnd="@dimen/main_screen_content_padding"
+            android:layout_marginEnd="@dimen/content_main_margin"
             android:src="@drawable/ic_partlysunny"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

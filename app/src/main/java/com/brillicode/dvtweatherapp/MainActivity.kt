@@ -19,7 +19,6 @@ package com.brillicode.dvtweatherapp
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.brillicode.dvtweatherapp.base.BaseActivity
 import com.brillicode.dvtweatherapp.databinding.ActivityMainBinding
 import com.brillicode.dvtweatherapp.ui.adapter.ForecastAdapter
@@ -43,14 +42,23 @@ class MainActivity : BaseActivity() {
 
 //        binding.rcvWeatherDays.adapter = adapter
 
-        viewModel.weather.observe(this, Observer {
+        viewModel.weather.observe(this, {
             val response = it!!.data
             binding.container.setBackgroundResource(R.drawable.sea_rainy)
-            binding.temperature.text = response!!.main.temp.toInt().toString()
-            binding.feel.text = response.weather!![0].main
+
+            val main = response!!.main
+            val weathers = response.weather!!
+            val currentTemp = main.temp.toInt().toString()
+
+            binding.tvMainTemp.text = currentTemp
+            binding.tvMainFeel.text = weathers[0].main
+
+            binding.tvMinTemp.text = main.temp_min.toInt().toString()
+            binding.tvCurrentTemp.text = currentTemp
+            binding.tvMaxTemp.text = main.temp_max.toInt().toString()
         })
 
-        viewModel.forecast.observe(this, Observer {
+        viewModel.forecast.observe(this, {
             val forecastResponse = it!!.data
             adapter.setForecasts(forecastResponse!!.list)
         })
@@ -80,6 +88,4 @@ class MainActivity : BaseActivity() {
         super.onRestart()
         validatePermission()
     }
-
-
 }

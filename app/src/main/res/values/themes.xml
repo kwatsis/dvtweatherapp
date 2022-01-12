@@ -10,23 +10,13 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="WrappedView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <!-- Linear layout -->
-    <style name="LinearRange" parent="WrappedView">
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_marginTop">@dimen/linear_layout_marginTop</item>
-    </style>
-
-    <style name="LinearRange.Weight" parent="LinearRange">
-        <item name="android:layout_weight">@dimen/linear_layout_default_weight</item>
     </style>
 
     <style name="TextStyle" parent="WrappedView">
@@ -37,36 +27,8 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="TextStyleRegular.Centre" parent="TextStyleRegular">
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="TextStyleRegular.End" parent="TextStyleRegular">
-        <item name="android:layout_gravity">end</item>
-    </style>
-
-    <style name="TextStyleRegular.Range" parent="TextStyleRegular">
-        <item name="android:textSize">@dimen/range_text_size</item>
-    </style>
-
-    <style name="TextStyleRegular.Range.Centre" parent="TextStyleRegular.Range">
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="TextStyleRegular.Range.End" parent="TextStyleRegular.Range">
-        <item name="android:layout_gravity">end</item>
-    </style>
-
     <style name="TextStyleLight" parent="TextStyle">
         <item name="android:fontFamily">@font/roboto_light</item>
-    </style>
-
-    <style name="TextStyleLight.Centre" parent="TextStyleLight">
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="TextStyleLight.End" parent="TextStyleLight">
-        <item name="android:layout_gravity">end</item>
     </style>
 
     <style name="TextStyleThin" parent="TextStyle">

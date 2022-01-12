@@ -1,15 +1,39 @@
 package com.brillicode.dvtweatherapp
 
+/**
+ * Copyright 2021 Kwatsinyana Sesotlo
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ **/
+
 import android.os.Bundle
-import android.widget.Toast
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.brillicode.dvtweatherapp.base.BaseActivity
 import com.brillicode.dvtweatherapp.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.brillicode.dvtweatherapp.ui.adapter.ForecastAdapter
+import com.brillicode.dvtweatherapp.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
-    private lateinit var binding: ActivityMainBinding;
+    @Inject
+    lateinit var adapter: ForecastAdapter
+    private val viewModel: MainViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,22 +41,45 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+//        binding.rcvWeatherDays.adapter = adapter
 
-        navView.setupWithNavController(navController)
+        viewModel.weather.observe(this, Observer {
+            val response = it!!.data
+            binding.container.setBackgroundResource(R.drawable.sea_rainy)
+            binding.temperature.text = response!!.main.temp.toInt().toString()
+            binding.feel.text = response.weather!![0].main
+        })
+
+        viewModel.forecast.observe(this, Observer {
+            val forecastResponse = it!!.data
+            adapter.setForecasts(forecastResponse!!.list)
+        })
+
+        viewModel.fetchWeatherForecast(deviceLong, deviceLong)
+
+//        validatePermission()
+    }
+
+    override fun onGrantedPermission() {
+
     }
 
     override fun onDeniedPermission() {
-        Toast.makeText(
-            this,
-            R.string.location_permission_denied_message,
-            Toast.LENGTH_LONG
-        ).show()
+        val snack = Snackbar.make(
+            binding.root,
+            getString(R.string.location_permission_denied_message),
+            Snackbar.LENGTH_LONG
+        )
+        snack.setAction(getString(R.string.ok)) {
+            finish()
+        }
+        snack.show()
     }
 
     override fun onRestart() {
         super.onRestart()
         validatePermission()
     }
+
+
 }

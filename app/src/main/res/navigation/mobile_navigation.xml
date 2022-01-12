@@ -6,15 +6,15 @@
     app:startDestination="@+id/navigation_home">
 
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.brillicode.dvtweatherapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:name="com.brillicode.dvtweatherapp.ui.screen.HomeFragment"-->
+<!--        android:label="@string/title_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
 
-    <fragment
-        android:id="@+id/navigation_favorites"
-        android:name="com.brillicode.dvtweatherapp.ui.favourites.FavouritesFragment"
-        android:label="@string/title_favs"
-        tools:layout="@layout/fragment_favourites" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_favorites"-->
+<!--        android:name="com.brillicode.dvtweatherapp.ui.screen.FavouritesFragment"-->
+<!--        android:label="@string/title_favs"-->
+<!--        tools:layout="@layout/fragment_favourites" />-->
 </navigation>

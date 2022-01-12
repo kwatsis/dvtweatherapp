@@ -19,10 +19,18 @@ package com.brillicode.dvtweatherapp.data.service
 
 import com.brillicode.dvtweatherapp.data.model.ForecastResponse
 import com.brillicode.dvtweatherapp.data.model.WeatherResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
+    @GET("forecast")
+    suspend fun getForecast(
+        @Query("appid") appId: String,
+        @Query("lon") longitude: Double,
+        @Query("lat") latitude: Double,
+        @Query("units") units: String,
+    ): Response<ForecastResponse>
 
     @GET("weather")
     suspend fun getWeather(
@@ -30,14 +38,5 @@ interface ApiService {
         @Query("lon") longitude: Double,
         @Query("lat") latitude: Double,
         @Query("units") units: String,
-    ): WeatherResponse
-
-    @GET("forecast")
-    suspend fun getForecast(
-        @Query("appid") appId: String,
-        @Query("lon") longitude: Double,
-        @Query("lat") latitude: Double,
-        @Query("units") units: String,
-    ): ForecastResponse
-
+    ): Response<WeatherResponse>
 }

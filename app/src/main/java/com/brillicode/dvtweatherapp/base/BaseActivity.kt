@@ -24,15 +24,12 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.util.Log
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.brillicode.dvtweatherapp.R
-import com.brillicode.dvtweatherapp.util.constants.AppConstants
+import com.brillicode.dvtweatherapp.util.AppConstants
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -44,13 +41,9 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
     protected open var deviceLong = 0.0
     protected open var deviceLat = 0.0
 
-    open fun onGrantedPermission(){}
+    open fun onGrantedPermission() {}
 
     open fun onDeniedPermission() {}
-
-
-    protected inline fun <reified T : ViewDataBinding> binding(@LayoutRes resId: Int): Lazy<T> =
-        lazy { DataBindingUtil.setContentView<T>(this, resId) }
 
     protected fun validatePermission() {
         Dexter.withActivity(this)
@@ -77,12 +70,14 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                     getLocation()
                 }
+
                 override fun onPermissionDenied(response: PermissionDeniedResponse?) {
                     onDeniedPermission()
                 }
             }
             ).check()
     }
+
     override fun onLocationChanged(location: Location) {
         deviceLong = location.longitude
         deviceLat = location.latitude
@@ -100,7 +95,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                2
+                AppConstants.FINE_LOCATION_RC
             )
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5f, this)

@@ -1,4 +1,4 @@
-package com.brillicode.dvtweatherapp.di
+package com.brillicode.dvtweatherapp.module
 
 /**
  * Copyright 2021 Kwatsinyana Sesotlo
@@ -18,18 +18,41 @@ package com.brillicode.dvtweatherapp.di
  **/
 
 import com.brillicode.dvtweatherapp.data.service.ApiService
-import com.brillicode.dvtweatherapp.util.constants.NetworkConstants
+import com.brillicode.dvtweatherapp.util.network.NetworkConstants
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 
-val networkModule = module {
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
 
-    single {
-        OkHttpClient.Builder().apply {
+    @Provides
+    fun provideApiClient(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    @Named("loggingInterceptor")
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            this.level = HttpLoggingInterceptor.Level.BODY
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttp() : OkHttpClient{
+        return OkHttpClient.Builder().apply {
             connectTimeout(NetworkConstants.CONNECT_TIMEOUT, TimeUnit.SECONDS)
             writeTimeout(NetworkConstants.WRITE_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(NetworkConstants.READ_TIMEOUT, TimeUnit.SECONDS)
@@ -40,13 +63,12 @@ val networkModule = module {
         }.build()
     }
 
-    single {
-        Retrofit.Builder()
-            .client(get<OkHttpClient>())
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
             .baseUrl(NetworkConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
             .build()
     }
-
-    single { get<Retrofit>().create(ApiService::class.java) }
 }

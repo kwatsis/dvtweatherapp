@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -46,6 +48,10 @@ dependencies {
     implementation "androidx.cardview:cardview:${versions.card}"
     implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
 
+    //hilt
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    kapt ("com.google.dagger:hilt-compiler:${versions.hilt}")
+
     //Architecture components
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
@@ -67,12 +73,12 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:${versions.glide}"
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
-    // koin dependencies
-    implementation "org.koin:koin-android:${versions.koin}"
-    implementation "org.koin:koin-android-viewmodel:${versions.koin}"
-
     implementation 'com.karumi:dexter:4.2.0'
     testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+kapt {
+    correctErrorTypes = true
 }

@@ -17,7 +17,54 @@ package com.brillicode.dvtweatherapp.data.repository
  *
  **/
 
+import com.brillicode.dvtweatherapp.base.BaseApiResponse
+import com.brillicode.dvtweatherapp.data.model.ForecastResponse
+import com.brillicode.dvtweatherapp.data.model.WeatherResponse
+import com.brillicode.dvtweatherapp.data.service.ApiService
+import com.brillicode.dvtweatherapp.util.network.NetworkConstants
+import com.brillicode.dvtweatherapp.util.network.NetworkResult
+import dagger.hilt.android.scopes.ActivityRetainedScoped
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-interface Repository {
-    suspend fun getWeather(type: String): List<Character>
+@ActivityRetainedScoped
+class Repository @Inject constructor(private val api: ApiService) :
+    BaseApiResponse() {
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+
+    suspend fun getForecast(
+        latitude: Double,
+        longitude: Double
+    ): Flow<NetworkResult<ForecastResponse>> {
+        return flow {
+            emit(apiCall {
+                api.getForecast(
+                    NetworkConstants.APP_ID,
+                    latitude,
+                    longitude,
+                    NetworkConstants.METRIC_UNIT
+                )
+            })
+        }.flowOn(ioDispatcher)
+    }
+
+    suspend fun getWeather(
+        latitude: Double,
+        longitude: Double
+    ): Flow<NetworkResult<WeatherResponse>> {
+        return flow {
+            emit(apiCall {
+                api.getWeather(
+                    NetworkConstants.APP_ID,
+                    latitude,
+                    longitude,
+                    NetworkConstants.METRIC_UNIT
+                )
+            })
+        }.flowOn(ioDispatcher)
+    }
 }

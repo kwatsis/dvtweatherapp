@@ -11,7 +11,7 @@ data class Forecast(
     val clouds: Clouds,
     val wind: Wind,
     val visibility: Long,
-    val pop: Int,
+    val pop: Double,
     val sys: Sys,
     val dt_txt: String
 ) : Parcelable

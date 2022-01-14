@@ -67,6 +67,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp-urlconnection:${versions.okhttp}"
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
 
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
     // image loading
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
     implementation 'androidx.databinding:databinding-runtime:7.0.4'

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.brillicode.dvtweatherapp.data.model.Forecast
-import com.brillicode.dvtweatherapp.databinding.WeatherItemBinding
+import com.brillicode.dvtweatherapp.databinding.ForecastItemBinding
 import javax.inject.Inject
 
 class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolder>() {
@@ -13,7 +13,7 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         return MainViewHolder(
-            WeatherItemBinding.inflate(
+            ForecastItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -23,7 +23,8 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val forecast = forecastList[position]
-        holder.binding.stName.text = forecast.dt_txt
+//        holder.binding.tvForecastDay.text = forecast.dt_txt
+        holder.binding.tvForecastTemp.text = forecast.main.temp_max.toString()
         //TODO [KJS - Add compound view here]
         //Glide.with(holder.itemView.context).load(movie.imageUrl).into(holder.binding.imageview)
     }
@@ -39,4 +40,4 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
     }
 }
 
-class MainViewHolder(val binding: WeatherItemBinding) : RecyclerView.ViewHolder(binding.root)
+class MainViewHolder(val binding: ForecastItemBinding) : RecyclerView.ViewHolder(binding.root)

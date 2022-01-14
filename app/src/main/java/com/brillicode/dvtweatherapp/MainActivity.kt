@@ -40,7 +40,7 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        binding.rcvWeatherDays.adapter = adapter
+        binding.rcvForecasts.adapter = adapter
 
         viewModel.weather.observe(this, {
             val response = it!!.data
@@ -59,13 +59,12 @@ class MainActivity : BaseActivity() {
         })
 
         viewModel.forecast.observe(this, {
-            val forecastResponse = it!!.data
-            adapter.setForecasts(forecastResponse!!.list)
+            val forecastResponse = it!!.data!!
+            adapter.setForecasts(forecastResponse.list)
         })
-
         viewModel.fetchWeatherForecast(deviceLong, deviceLong)
 
-//        validatePermission()
+        validatePermission()
     }
 
     override fun onGrantedPermission() {

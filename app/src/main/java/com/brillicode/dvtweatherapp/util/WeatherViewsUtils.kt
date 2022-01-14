@@ -1,11 +1,12 @@
 package com.brillicode.dvtweatherapp.util
 
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import com.brillicode.dvtweatherapp.R
 import com.bumptech.glide.Glide
 
-object ResourceUtil {
+object WeatherViewsUtils {
 
     fun loadResource(context: Context, weatherId: Int, imageView: ImageView?) {
         val resMap: HashMap<Int, Int> = HashMap()
@@ -23,4 +24,9 @@ object ResourceUtil {
         }
         Glide.with(context).load(drawableId!!).into(imageView!!)
     }
+
+    fun addDegreeSymbol(context: Context, weatherNumber: String): String {
+        return weatherNumber + context.getString(R.string.unicode_degrees)
+    }
+
 }

@@ -2,12 +2,11 @@ package com.brillicode.dvtweatherapp.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.brillicode.dvtweatherapp.data.model.Forecast
 import com.brillicode.dvtweatherapp.databinding.ForecastItemBinding
-import com.brillicode.dvtweatherapp.util.ResourceUtil
+import com.brillicode.dvtweatherapp.util.WeatherViewsUtils
 import javax.inject.Inject
 
 class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolder>() {
@@ -26,11 +25,13 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val forecast = forecastList[position]
         val binding = holder.binding
+        val context = holder.itemView.context
 
         binding.tvForecastDay.text = forecast.dt_txt
-        binding.tvForecastTemp.text = forecast.main.temp_max.toString()
+        binding.tvForecastTemp.text =
+            WeatherViewsUtils.addDegreeSymbol(context, forecast.main.temp_max.toString())
 
-        ResourceUtil.loadResource(holder.itemView.context, forecast.weather[0].id, binding.imgForecast)
+        WeatherViewsUtils.loadResource(context, forecast.weather[0].id, binding.imgForecast)
     }
 
     override fun getItemCount(): Int {

@@ -22,6 +22,7 @@ import androidx.activity.viewModels
 import com.brillicode.dvtweatherapp.base.BaseActivity
 import com.brillicode.dvtweatherapp.databinding.ActivityMainBinding
 import com.brillicode.dvtweatherapp.ui.adapter.ForecastAdapter
+import com.brillicode.dvtweatherapp.util.WeatherViewsUtils
 import com.brillicode.dvtweatherapp.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,12 +51,14 @@ class MainActivity : BaseActivity() {
             val weathers = response.weather!!
             val currentTemp = main.temp.toInt().toString()
 
-            binding.tvMainTemp.text = currentTemp
+            binding.tvMainTemp.text = WeatherViewsUtils.addDegreeSymbol(this, currentTemp)
             binding.tvMainFeel.text = weathers[0].main
 
-            binding.tvMinTemp.text = main.temp_min.toInt().toString()
-            binding.tvCurrentTemp.text = currentTemp
-            binding.tvMaxTemp.text = main.temp_max.toInt().toString()
+            binding.tvMinTemp.text =
+                WeatherViewsUtils.addDegreeSymbol(this, main.temp_min.toInt().toString())
+            binding.tvCurrentTemp.text = WeatherViewsUtils.addDegreeSymbol(this, currentTemp)
+            binding.tvMaxTemp.text =
+                WeatherViewsUtils.addDegreeSymbol(this, main.temp_max.toInt().toString())
         })
 
         viewModel.forecast.observe(this, {

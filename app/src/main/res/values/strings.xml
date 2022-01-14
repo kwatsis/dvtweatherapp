@@ -12,5 +12,7 @@
     <string name="splash_image">Splash image</string>
     <string name="title_home">Home</string>
     <string name="title_favs">Favourites</string>
+    <string name="unicode_degrees">&#xb0;</string>
     <string name="wind_speed">Km per hour</string>
+
 </resources>

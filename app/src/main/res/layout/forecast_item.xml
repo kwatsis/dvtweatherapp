@@ -25,7 +25,7 @@
         style="@style/TextStyleLight"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/ic_rain"
+        tools:src="@drawable/ic_rain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_forecast_temp"
         app:layout_constraintHorizontal_bias="0.5"

@@ -2,10 +2,12 @@ package com.brillicode.dvtweatherapp.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.brillicode.dvtweatherapp.data.model.Forecast
 import com.brillicode.dvtweatherapp.databinding.ForecastItemBinding
+import com.brillicode.dvtweatherapp.util.ResourceUtil
 import javax.inject.Inject
 
 class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolder>() {
@@ -23,10 +25,13 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val forecast = forecastList[position]
-//        holder.binding.tvForecastDay.text = forecast.dt_txt
-        holder.binding.tvForecastTemp.text = forecast.main.temp_max.toString()
-        //TODO [KJS - Add compound view here]
-        //Glide.with(holder.itemView.context).load(movie.imageUrl).into(holder.binding.imageview)
+        val binding = holder.binding
+
+        binding.tvForecastTemp.text = forecast.dt_txt
+        binding.tvForecastTemp.text = forecast.main.temp_max.toString()
+
+        ResourceUtil.loadResource(holder.itemView.context, forecast.weather[0].id, binding.imgForecast)
+
     }
 
     override fun getItemCount(): Int {

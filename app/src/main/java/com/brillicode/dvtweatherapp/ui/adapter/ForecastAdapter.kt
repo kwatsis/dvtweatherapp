@@ -27,11 +27,10 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
         val forecast = forecastList[position]
         val binding = holder.binding
 
-        binding.tvForecastTemp.text = forecast.dt_txt
+        binding.tvForecastDay.text = forecast.dt_txt
         binding.tvForecastTemp.text = forecast.main.temp_max.toString()
 
         ResourceUtil.loadResource(holder.itemView.context, forecast.weather[0].id, binding.imgForecast)
-
     }
 
     override fun getItemCount(): Int {

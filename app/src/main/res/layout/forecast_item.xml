@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="26dp"
-    android:background="@color/dvt_blue">
+    android:layout_height="32dp"
+    android:background="@android:color/transparent">
 
     <TextView
-        android:id="@+id/tv_min_temp"
+        android:id="@+id/tv_forecast_day"
         style="@style/TextStyleLight"
         android:layout_width="0dp"
         android:gravity="start"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_forecast_temp"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_min_temp"
+        app:layout_constraintStart_toEndOf="@+id/tv_forecast_day"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 

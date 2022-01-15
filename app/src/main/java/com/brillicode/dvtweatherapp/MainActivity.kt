@@ -50,15 +50,18 @@ class MainActivity : BaseActivity() {
             val main = response!!.main
             val weathers = response.weather!!
             val currentTemp = main.temp.toInt().toString()
+            val weather = weathers[0]
 
-            binding.tvMainTemp.text = WeatherViewsUtils.addDegreeSymbol(this, currentTemp)
-            binding.tvMainFeel.text = weathers[0].main
+            binding.tvMainTemp.text = WeatherViewsUtils.withDegreeSymbol(this, currentTemp)
+            binding.tvMainFeel.text = weather.main
 
             binding.tvMinTemp.text =
-                WeatherViewsUtils.addDegreeSymbol(this, main.temp_min.toInt().toString())
-            binding.tvCurrentTemp.text = WeatherViewsUtils.addDegreeSymbol(this, currentTemp)
+                WeatherViewsUtils.withDegreeSymbol(this, main.temp_min.toInt().toString())
+            binding.tvCurrentTemp.text = WeatherViewsUtils.withDegreeSymbol(this, currentTemp)
             binding.tvMaxTemp.text =
-                WeatherViewsUtils.addDegreeSymbol(this, main.temp_max.toInt().toString())
+                WeatherViewsUtils.withDegreeSymbol(this, main.temp_max.toInt().toString())
+
+            WeatherViewsUtils.modifyView(this, weather.id, null, binding.container)
         })
 
         viewModel.forecast.observe(this, {

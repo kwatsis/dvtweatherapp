@@ -31,6 +31,10 @@
         <item name="android:fontFamily">@font/roboto_light</item>
     </style>
 
+    <style name="TextStyleLight.Center" parent="TextStyleLight">
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
     <style name="TextStyleThin" parent="TextStyle">
         <item name="android:fontFamily">@font/roboto_thin</item>
     </style>

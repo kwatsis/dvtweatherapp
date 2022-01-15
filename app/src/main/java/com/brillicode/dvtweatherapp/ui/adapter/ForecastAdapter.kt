@@ -29,9 +29,9 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
 
         binding.tvForecastDay.text = forecast.dt_txt
         binding.tvForecastTemp.text =
-            WeatherViewsUtils.addDegreeSymbol(context, forecast.main.temp_max.toString())
+            WeatherViewsUtils.withDegreeSymbol(context, forecast.main.temp_max.toString())
 
-        WeatherViewsUtils.loadResource(context, forecast.weather[0].id, binding.imgForecast)
+        WeatherViewsUtils.modifyView(context, forecast.weather[0].id, binding.imgForecast, null)
     }
 
     override fun getItemCount(): Int {

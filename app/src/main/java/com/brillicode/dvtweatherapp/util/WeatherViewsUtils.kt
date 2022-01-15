@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 
 object WeatherViewsUtils {
 
-    fun loadResource(context: Context, weatherId: Int, imageView: ImageView?) {
+    fun modifyView(context: Context, weatherId: Int, imageView: ImageView?, view: View?) {
         val resMap: HashMap<Int, Int> = HashMap()
         var drawableId: Int? = 0
         var colorId: Int? = 0
@@ -22,11 +22,14 @@ object WeatherViewsUtils {
             drawableId = key
             colorId = value
         }
-        Glide.with(context).load(drawableId!!).into(imageView!!)
+        view?.setBackgroundResource(colorId!!)
+
+        if (imageView != null) {
+            Glide.with(context).load(drawableId!!).into(imageView)
+        }
     }
 
-    fun addDegreeSymbol(context: Context, weatherNumber: String): String {
+    fun withDegreeSymbol(context: Context, weatherNumber: String): String {
         return weatherNumber + context.getString(R.string.unicode_degrees)
     }
-
 }

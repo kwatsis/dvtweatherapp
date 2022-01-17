@@ -27,7 +27,7 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
         val binding = holder.binding
         val context = holder.itemView.context
 
-        binding.tvForecastDay.text = AppUtils.getFormattedDate(forecast.dt_txt)
+        binding.tvForecastDay.text = AppUtils.getDayOfWeek(forecast.dt_txt)
         binding.tvForecastTemp.text =
             AppUtils.withDegreeSymbol(context, forecast.main.temp_max.toString())
 

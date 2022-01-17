@@ -97,7 +97,7 @@ open class BaseActivity : AppCompatActivity(), LocationListener {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                AppConstants.FINE_LOCATION_RC
+                AppConstants.FINE_LOCATION_REQUEST_CODE
             )
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5f, this)

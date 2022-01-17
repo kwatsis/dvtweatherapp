@@ -37,13 +37,13 @@ object AppUtils {
         return reading + context.getString(R.string.unicode_degrees)
     }
 
-    fun getFormattedDate(dateString: String): String {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    fun getDayOfWeek(dateString: String): String {
+        val formatter = DateTimeFormatter.ofPattern(AppConstants.FORMATTER_PATTERN)
         val date = LocalDate.parse(dateString, formatter)
         val c = Calendar.getInstance()
         c[2022, 1, 10, 0, 0] = 0
         c.add(Calendar.DAY_OF_MONTH, date.dayOfMonth)
-        return java.lang.String.format("%tA", c)
+        return java.lang.String.format(AppConstants.DAY_OF_WEEK_FORMAT, c)
     }
 
 }

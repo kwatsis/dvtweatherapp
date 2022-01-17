@@ -5,8 +5,12 @@ import android.view.View
 import android.widget.ImageView
 import com.brillicode.dvtweatherapp.R
 import com.bumptech.glide.Glide
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.HashMap
 
-object WeatherViewsUtils {
+object AppUtils {
 
     fun modifyView(context: Context, weatherId: Int, imageView: ImageView?, view: View?) {
         val resMap: HashMap<Int, Int> = HashMap()
@@ -29,7 +33,17 @@ object WeatherViewsUtils {
         }
     }
 
-    fun withDegreeSymbol(context: Context, weatherNumber: String): String {
-        return weatherNumber + context.getString(R.string.unicode_degrees)
+    fun withDegreeSymbol(context: Context, reading: String): String {
+        return reading + context.getString(R.string.unicode_degrees)
     }
+
+    fun getFormattedDate(dateString: String): String {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val date = LocalDate.parse(dateString, formatter)
+        val c = Calendar.getInstance()
+        c[2022, 1, 10, 0, 0] = 0
+        c.add(Calendar.DAY_OF_MONTH, date.dayOfMonth)
+        return java.lang.String.format("%tA", c)
+    }
+
 }

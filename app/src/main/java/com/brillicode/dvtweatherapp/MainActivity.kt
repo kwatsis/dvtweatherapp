@@ -22,7 +22,7 @@ import androidx.activity.viewModels
 import com.brillicode.dvtweatherapp.base.BaseActivity
 import com.brillicode.dvtweatherapp.databinding.ActivityMainBinding
 import com.brillicode.dvtweatherapp.ui.adapter.ForecastAdapter
-import com.brillicode.dvtweatherapp.util.WeatherViewsUtils
+import com.brillicode.dvtweatherapp.util.AppUtils
 import com.brillicode.dvtweatherapp.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,16 +52,16 @@ class MainActivity : BaseActivity() {
             val currentTemp = main.temp.toInt().toString()
             val weather = weathers[0]
 
-            binding.tvMainTemp.text = WeatherViewsUtils.withDegreeSymbol(this, currentTemp)
+            binding.tvMainTemp.text = AppUtils.withDegreeSymbol(this, currentTemp)
             binding.tvMainFeel.text = weather.main
 
             binding.tvMinTemp.text =
-                WeatherViewsUtils.withDegreeSymbol(this, main.temp_min.toInt().toString())
-            binding.tvCurrentTemp.text = WeatherViewsUtils.withDegreeSymbol(this, currentTemp)
+                AppUtils.withDegreeSymbol(this, main.temp_min.toInt().toString())
+            binding.tvCurrentTemp.text = AppUtils.withDegreeSymbol(this, currentTemp)
             binding.tvMaxTemp.text =
-                WeatherViewsUtils.withDegreeSymbol(this, main.temp_max.toInt().toString())
+                AppUtils.withDegreeSymbol(this, main.temp_max.toInt().toString())
 
-            WeatherViewsUtils.modifyView(this, weather.id, null, binding.container)
+            AppUtils.modifyView(this, weather.id, null, binding.container)
         })
 
         viewModel.forecast.observe(this, {

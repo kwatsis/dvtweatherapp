@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.brillicode.dvtweatherapp.data.model.Forecast
 import com.brillicode.dvtweatherapp.databinding.ForecastItemBinding
-import com.brillicode.dvtweatherapp.util.WeatherViewsUtils
+import com.brillicode.dvtweatherapp.util.AppUtils
 import javax.inject.Inject
 
 class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolder>() {
@@ -27,11 +27,11 @@ class ForecastAdapter @Inject constructor() : RecyclerView.Adapter<MainViewHolde
         val binding = holder.binding
         val context = holder.itemView.context
 
-        binding.tvForecastDay.text = forecast.dt_txt
+        binding.tvForecastDay.text = AppUtils.getFormattedDate(forecast.dt_txt)
         binding.tvForecastTemp.text =
-            WeatherViewsUtils.withDegreeSymbol(context, forecast.main.temp_max.toString())
+            AppUtils.withDegreeSymbol(context, forecast.main.temp_max.toString())
 
-        WeatherViewsUtils.modifyView(context, forecast.weather[0].id, binding.imgForecast, null)
+        AppUtils.modifyView(context, forecast.weather[0].id, binding.imgForecast, null)
     }
 
     override fun getItemCount(): Int {
